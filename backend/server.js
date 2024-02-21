@@ -1,6 +1,7 @@
 const express = require("express")
 const dotenv = require('dotenv');
 const mongoose = require("mongoose");
+var cors = require('cors')
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ const connectRedis = async () => {
 const Entries = require("./models");
 
 const app = express()
+
+
+app.use(cors())
 
 const PORT = process.env.PORT || 8080
 
