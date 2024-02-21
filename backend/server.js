@@ -26,6 +26,8 @@ const DB = process.env.DB_URL
 
 app.use(express.json())
 
+app.use(cors())
+
 
 const connectDB = () => {
     mongoose.connect(DB, {
