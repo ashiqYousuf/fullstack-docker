@@ -42,14 +42,12 @@ const connectDB = () => {
 app.use("/ping", (req, res) => {
     try{
         res.status(200).json({
-            success: true,
-            endpoint: "/ping",
-            message: "pong"
+            message: "Connected to the backend"
         })
     }catch(err) {
         console.log(err)
         res.status(200).json({
-            success:false,
+            message: "Error while connecting"
         })
     }
 })
@@ -76,13 +74,14 @@ app.use("/db",async(req, res) => {
         data: {
             entries: entries,
             results: entries.length,
+            message: "Connect to the DB"
         },
     })
     }catch (err) {
         console.log(err)
         res.status(400).json({
             success: false,
-            message: "Something went wrong"
+            message: "Not connected to DB"
         })
     }
 })
@@ -100,12 +99,13 @@ app.use("/redis", async(req, res) => {
             success: true,
             endpoint: "/redis",
             key: value,
+            message: "Connected to Redis"
         })
     }catch (err) {
         console.log(err)
         res.status(400).json({
             success: false,
-            message: "Something went wrong"
+            message: "Not connected to Redis"
         })
     }
 })
