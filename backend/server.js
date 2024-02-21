@@ -10,13 +10,11 @@ const REDIS_URL = process.env.REDIS_URL
 
 let redisClient;
 
-(async () => {
+const connectRedis = async () => {
   redisClient = redis.createClient(REDIS_URL);
-
   redisClient.on("error", (error) => console.error(`Error : ${error}`));
-
     redisClient.connect().then(() => {console.log("REDIS CONNECTED")}).catch((err) => console.log(err))
-})();
+}
 
 const Entries = require("./models");
 
@@ -95,6 +93,7 @@ const cache = async (key="key", value="value") => {
 
 app.use("/redis", async(req, res) => {
     try{
+        connectRedis()
         const {key, value} = req.body
         cache(key, value)
         res.status(200).json({
